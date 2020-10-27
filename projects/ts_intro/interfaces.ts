@@ -24,8 +24,6 @@ drawPoint2({ x: 1, y: 1 });
 
 
 // we can define optional properties
-
-
 interface IPointWithColor {
     x: number;
     y: number;
@@ -38,8 +36,7 @@ let drawPointWithColor = (point: IPointWithColor){
 
 drawPointWithColor({ x: 1, y: 1, color: 'blue' });
 
-//or if can call it with out color since its optional
-
+//or we can call it with out color since its optional
 drawPointWithColor({ x: 1, y: 1 });
 
 
@@ -73,8 +70,6 @@ let anotherSum: addFunc = (a: number, b: number) => { return a + b };
 
 
 // indexable types like objects/ arrays
-
-
 //index signature number
 interface StringArray {
     [index: number]: string;
@@ -93,7 +88,47 @@ interface Animal {
     age: number;
 }
 
+//an interface extending another interface
 interface Dog extends Animal {
     breed: string;
     age: number
+}
+
+
+let x: Animal; //x has properties of only Animal
+let y: Dog; // y has all properties of animal + Dog
+
+
+
+//class Types
+// we can describe the properties and methods of a class using interfaces
+//interfaces describe the public side of the class
+
+interface ClockInterface {
+    currentTime: Date;
+    setTime(d: Date): void;
+    displayTime(): Date;
+}
+
+class AnalogClock implements ClockInterface {
+    currentTime: Date = new Date();
+    constructor(h: number, m: number) { }
+    displayTime(): Date {
+        throw new Error("Method not implemented.");
+    }
+    setTime(d: Date): void {
+        this.currentTime = d;
+    }
+}
+
+
+class DigitalClock implements ClockInterface {
+    displayTime(): Date {
+        throw new Error("Method not implemented.");
+    }
+    currentTime: Date;
+    setTime(d: Date): void {
+        throw new Error("Method not implemented.");
+    }
+
 }
