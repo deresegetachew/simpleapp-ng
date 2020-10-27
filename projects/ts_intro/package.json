@@ -1,0 +1,10 @@
+{
+  "name": "ts_intro",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^9.0.0"
+  }
+}
