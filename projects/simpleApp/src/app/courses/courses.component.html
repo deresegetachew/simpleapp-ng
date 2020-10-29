@@ -1,0 +1,34 @@
+<h4>
+    Trainee: {{trainee | uppercase}}
+</h4>
+<div class="d-flex flex-row justify-content-between">
+    <h3 class="float-left">Courses</h3>
+    <button class="float-right" type="button" class="btn btn-secondary" (click)="toggleLogoColVisibility()">
+        {{logoColVisible == 'table-cell' ? 'hide' : 'show'}} Logos
+    </button>
+</div>
+<table class="table">
+    <tr>
+        <th [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2">title</th>
+        <th [style.display]="logoColVisible" class="float-right">logo</th>
+    </tr>
+    <tr [class.table-success]="coursesTaken[0].completed">
+        <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[0].title}}</td>
+        <td [style.display]="logoColVisible" [attr.colspan]=2>
+            <img class="img-thumbnail float-right rounded" [src]='coursesTaken[0].url' height="200" width="200" />
+        </td>
+    </tr>
+    <tr [class.table-success]="coursesTaken[1].completed">
+        <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[1].title}}</td>
+        <td [style.display]="logoColVisible" [attr.colspan]=2>
+            <img class="img-thumbnail float-right" [src]='coursesTaken[1].url' height="200" width="200" />
+        </td>
+    </tr>
+    <tr [class.tableSuccess]="coursesTaken[2].completed">
+        <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[2].title}}</td>
+        <td [style.display]="logoColVisible" [attr.colspan]=2>
+            <img class="img-thumbnail float-right" [src]='coursesTaken[2].url' height="200" width="200" />
+        </td>
+    </tr>
+
+</table>
