@@ -3,32 +3,95 @@
 </h4>
 <div class="d-flex flex-row justify-content-between">
     <h3 class="float-left">Courses</h3>
-    <button class="float-right" type="button" class="btn btn-secondary" (click)="toggleLogoColVisibility()">
-        {{logoColVisible == 'table-cell' ? 'hide' : 'show'}} Logos
-    </button>
-</div>
-<table class="table">
-    <tr>
-        <th [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2">title</th>
-        <th [style.display]="logoColVisible" class="float-right">logo</th>
-    </tr>
-    <tr [class.table-success]="coursesTaken[0].completed">
-        <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[0].title}}</td>
-        <td [style.display]="logoColVisible" [attr.colspan]=2>
-            <img class="img-thumbnail float-right rounded" [src]='coursesTaken[0].url' height="200" width="200" />
-        </td>
-    </tr>
-    <tr [class.table-success]="coursesTaken[1].completed">
-        <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[1].title}}</td>
-        <td [style.display]="logoColVisible" [attr.colspan]=2>
-            <img class="img-thumbnail float-right" [src]='coursesTaken[1].url' height="200" width="200" />
-        </td>
-    </tr>
-    <tr [class.tableSuccess]="coursesTaken[2].completed">
-        <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[2].title}}</td>
-        <td [style.display]="logoColVisible" [attr.colspan]=2>
-            <img class="img-thumbnail float-right" [src]='coursesTaken[2].url' height="200" width="200" />
-        </td>
-    </tr>
 
-</table>
+    <div class="float-right form-inline">
+        <ul class="nav nav-pills inline mr-3">
+            <li class="nav-item">
+                <a [class.active]="viewMode == 'list'" class="nav-link" (click)="viewMode = 'list'">
+                    <span class="oi oi-list-rich"></span></a>
+            </li>
+            <li class="nav-item">
+                <a [class.active]="viewMode == 'grid'" class="nav-link" (click)="viewMode = 'grid'">
+                    <span class="oi oi-grid-three-up"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'grid'" class="row mt-5">
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="coursesTaken[0].url" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">{{coursesTaken[0].title}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="coursesTaken[1].url" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">{{coursesTaken[1].title}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="coursesTaken[2].url" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">{{coursesTaken[2].title}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div *ngSwitchCase="'list'">
+        <div class="row float-right mt-3">
+            <button type="button" class="btn btn-secondary inline" (click)="toggleLogoColVisibility()">
+                {{logoColVisible == 'table-cell' ? 'Hide' : 'Show'}} Logos
+            </button>
+        </div>
+
+        <table class="table" *ngIf="coursesTaken.length > 0">
+            <tr>
+                <th [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2">title</th>
+                <th [style.display]="logoColVisible" class="float-right">logo</th>
+            </tr>
+            <tr [class.table-success]="coursesTaken[0].completed">
+                <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[0].title}}</td>
+                <td [style.display]="logoColVisible" [attr.colspan]=2>
+                    <img class="img-thumbnail float-right rounded" [src]='coursesTaken[0].url' height="200"
+                        width="200" />
+                </td>
+            </tr>
+            <tr [class.table-success]="coursesTaken[1].completed">
+                <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[1].title}}</td>
+                <td [style.display]="logoColVisible" [attr.colspan]=2>
+                    <img class="img-thumbnail float-right" [src]='coursesTaken[1].url' height="200" width="200" />
+                </td>
+            </tr>
+            <tr [class.tableSuccess]="coursesTaken[2].completed">
+                <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{coursesTaken[2].title}}</td>
+                <td [style.display]="logoColVisible" [attr.colspan]=2>
+                    <img class="img-thumbnail float-right" [src]='coursesTaken[2].url' height="200" width="200" />
+                </td>
+            </tr>
+        </table>
+
+        <table *ngIf="coursesTaken.length == 0">
+            <tr>
+                <th [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2">title</th>
+                <th [style.display]="logoColVisible" class="float-right">logo</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    No Courses Yet
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div *ngSwitchDefault>View Mode not chosen</div>
+</div>

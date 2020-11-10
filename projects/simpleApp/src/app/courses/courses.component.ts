@@ -25,7 +25,8 @@ export class CoursesComponent {
             url: 'https://nodejs.org/static/images/logo.svg',
             completed: true,
         }
-    ]
+    ];
+    viewMode: string = "grid"; //possible values grid | list
 
     toggleLogoColVisibility() {
         if (this.logoColVisible == 'table-cell')
