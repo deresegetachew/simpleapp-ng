@@ -15,9 +15,6 @@ export class ProductService {
   getCourses() {
     let url = 'https://jsonplaceholder.typicode.com/albums';
 
-
-
-
     this.http.get(url).subscribe(response => {
       //subscription function
       console.log(response);

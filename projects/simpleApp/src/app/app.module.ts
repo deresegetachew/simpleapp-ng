@@ -4,15 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { CourseComponent } from './course/course.component';
-import { CoursesComponent } from './courses/courses.component';
-import { HomeComponent } from './home/home.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { NotfoundComponent } from './notfound/notfound.component';
-import { OrdersComponent } from './orders/orders.component';
-import { ProductDetailComponent } from './product/product-detail.component';
-import { ProductComponent } from './product/product.component';
-import { TformsComponent } from './tforms/tforms.component';
+import { CourseComponent } from './components/course/course.component';
+import { CoursesComponent } from './components/courses/courses.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { ProductDetailComponent } from './components/product/product-detail.component';
+import { ProductComponent } from './components/product/product.component';
+import { TformsComponent } from './components/tforms/tforms.component';
+import { TodoComponent } from './components/todo/todo.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { TformsComponent } from './tforms/tforms.component';
     ProductDetailComponent,
     OrdersComponent,
     HomeComponent,
-    NavigationComponent
+    NavigationComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,

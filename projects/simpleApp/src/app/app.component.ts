@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +11,8 @@ export class AppComponent {
   mntText: string;
   secText: string;
 
-  constructor(productService: ProductService) {
-    console.log(productService.getCurrentDate());
-    console.log(productService.getCourses());
+  constructor() {
+    // 
   }
 
   currentDate(): string {
