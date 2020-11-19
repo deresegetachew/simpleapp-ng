@@ -2,8 +2,8 @@ import { Component } from "@angular/core";
 
 @Component({
     selector: 'courses',
-    templateUrl: './courses.component.html'
-    //templateUrl: './courses.component-ngfor.html'
+    //templateUrl: './courses.component.html'
+    templateUrl: './courses.component-ngfor.html'
 })
 export class CoursesComponent {
 

@@ -7,7 +7,7 @@ import { ProductService } from './services/product.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'Hello';
+  title: string = 'Simple App';
   hrText: string;
   mntText: string;
   secText: string;

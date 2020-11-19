@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
 import { CoursesComponent } from './courses/courses.component';
 import { HomeComponent } from './home/home.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductDetailComponent } from './product/product-detail.component';
@@ -22,7 +23,8 @@ import { TformsComponent } from './tforms/tforms.component';
     ProductComponent,
     ProductDetailComponent,
     OrdersComponent,
-    HomeComponent
+    HomeComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import { TformsComponent } from './tforms/tforms.component';
       { path: '', component: HomeComponent },
       { path: 'product', component: ProductComponent },
       { path: 'product/:id', component: ProductDetailComponent },
+      { path: 'forms', component: TformsComponent },
       { path: '**', component: NotfoundComponent }
     ])
   ],
