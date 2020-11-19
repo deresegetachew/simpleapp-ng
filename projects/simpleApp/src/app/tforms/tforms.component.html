@@ -1,0 +1,81 @@
+<p>template forms</p>
+
+<form #productform="ngForm" (ngSubmit)="submit(productform)">
+    <div class="form-group">
+        <label for="productName">Product name</label>
+        <input required minlength="3" maxlength="15" pattern="[A-Za-z0-9\s]+" ngModel id="productName"
+            name="productName" type="text" #name="ngModel" class="form-control" (change)="log(name)" />
+        <div class="alert alert-danger" *ngIf="!name.valid && name.touched">
+            <div *ngIf="name.errors.required">
+                product name is required
+            </div>
+            <div *ngIf="name.errors.minlength">
+                product name must be at list {{name.errors.minlength.requiredLength}} words long
+            </div>
+            <div *ngIf="name.errors.pattern">
+                product name can only contain text and numbers
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea ngModel id="description" name="description" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+    <!-- represent complex structures with ngModelGroup -->
+    <div ngModelGroup="specs" #tempSpecs class="form-group">
+
+        <div class="alert alert-danger" *ngIf="!tempSpecs.valid && tempSpecs.touched">
+            <div>product specs are invalid</div>
+        </div>
+
+        <div class="form-group">
+            <label for="difficulty">Difficulty</label>
+            <select name="difficulty" required ngModel class="form-control">
+                <option selected></option>
+                <option value="Begginer">Beginner</option>
+                <option value="Medium">Medium</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+        </div>
+
+        <div class="from-group">
+            <label for="prerequisite">Prerequisite</label>
+            <select name="prerequisite" multiple=true ngModel class="form-control">
+                <option></option>
+                <option>javascript</option>
+                <option>Object Oriented Programming</option>
+                <option>css</option>
+            </select>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <label for="instructors">Instructors</label>
+            <select name="instructors" multiple=true ngModel class="form-control">
+                <option></option>
+                <option>kebe</option>
+                <option>abe</option>
+                <option>sami</option>
+            </select>
+        </div>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" ngModel name="isActive" value=true required #isActive="ngModel" />
+            Enable
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" ngModel name="isActive" value=false required #isActive="ngModel" />
+            Disable
+        </label>
+    </div>
+
+    {{productform.value | json}}
+    <button [disabled]="!productform.valid" type="submit" class="btn btn-primary">Create Product</button>
+</form>
+
+<form #ft="ngForm" (ngSubmit)="submit(ft)">
+
+</form>

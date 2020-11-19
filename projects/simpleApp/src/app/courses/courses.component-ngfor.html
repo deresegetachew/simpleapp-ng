@@ -1,0 +1,75 @@
+<!-- Question 15 -->
+
+<h4>
+    Trainee: {{trainee | uppercase}}
+</h4>
+<div class="d-flex flex-row justify-content-between">
+    <h3 class="float-left">Courses ({{coursesTaken.length}})</h3>
+
+    <div class="float-right form-inline">
+        <button type="button" class="btn btn-light" (click)="loadCourses()">
+            <span class="oi oi-loop-circular"></span>
+        </button>
+        <ul class="nav nav-pills inline mr-3">
+            <li class="nav-item">
+                <a [class.active]="viewMode == 'list'" class="nav-link" (click)="viewMode = 'list'">
+                    <span class="oi oi-list-rich"></span></a>
+            </li>
+            <li class="nav-item">
+                <a [class.active]="viewMode == 'grid'" class="nav-link" (click)="viewMode = 'grid'">
+                    <span class="oi oi-grid-three-up"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'grid'" class="row mt-5">
+        <div class="col-sm" *ngFor="let course of coursesTaken">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="course.url" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">{{course.title}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngSwitchCase="'list'">
+        <div class="row float-right mt-3">
+            <button type="button" class="btn btn-secondary inline" (click)="toggleLogoColVisibility()">
+                {{logoColVisible == 'table-cell' ? 'Hide' : 'Show'}} Logos
+            </button>
+        </div>
+
+        <table class="table" *ngIf="coursesTaken.length > 0">
+            <tr>
+                <th>Count</th>
+                <th [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2">title</th>
+                <th [style.display]="logoColVisible" class="float-right">logo</th>
+            </tr>
+            <tr [class.table-success]="course.completed"
+                *ngFor="let course of coursesTaken; trackBy: trackCourse ; index as i">
+                <td>{{i+1}}</td>
+                <td [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2"> {{course.title}}</td>
+                <td [style.display]="logoColVisible" [attr.colspan]=2>
+                    <img class="img-thumbnail float-right rounded" [src]='course.url' height="200" width="200" />
+                </td>
+            </tr>
+        </table>
+
+        <table *ngIf="coursesTaken.length == 0">
+            <tr>
+                <th [attr.colspan]="logoColVisible == 'table-cell' ? 1 : 2">title</th>
+                <th [style.display]="logoColVisible" class="float-right">logo</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    No Courses Yet
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div *ngSwitchDefault>View Mode not chosen</div>
+</div>

@@ -1,6 +1,49 @@
 <div class="container">
   <h1>Welcome to {{title}}</h1>
-  <h4>{{currentDate() | date: "yyyy/mm/dd"}}</h4>
-  <span [textContent]="hrText+':'+mntText+':'+secText"></span>
-  <courses></courses>
+
+
+  <app-tforms></app-tforms>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- <div class="navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Products</a>
+        </li>
+      </ul>
+    </div> -->
+
+    <div class="navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLinkActive="active current" routerLink="">Home <span
+              class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active current" routerLink="product">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active current" [routerLink]="['/product','id']">Products</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+  ???
+  <!-- <product></product> -->
+
+
+  <!-- <h4>{{currentDate() | date: "yyyy/mm/dd"}}</h4>
+  <span [textContent]="hrText+':'+mntText+':'+secText"></span> -->
+  <!-- <courses></courses> -->
+
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'Simple App';
+  title: string = 'Hello';
   hrText: string;
   mntText: string;
   secText: string;
+
+  constructor(productService: ProductService) {
+    console.log(productService.getCurrentDate());
+    console.log(productService.getCourses());
+  }
 
   currentDate(): string {
     return Date();
@@ -44,4 +50,8 @@ export class AppComponent {
   ngOnInit() {
     this.timer();
   }
+
+
 }
+
+
