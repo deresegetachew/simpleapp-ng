@@ -12,7 +12,5 @@ Technologies we are gone use
 
 ## Topics we are going to cover:
 
-### Day 1:
-
-- [Introduction to Typescript](/project/intro_ts)
-- [Introduction to Angular](/project/intro_angular)
+- [Introduction to Typescript](/projects/ts_intro)
+- [Introduction to Angular](/projects/simpleApp)
