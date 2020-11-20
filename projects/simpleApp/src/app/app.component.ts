@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurrentDateService } from './services/current-date.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,12 @@ export class AppComponent {
   mntText: string;
   secText: string;
 
-  constructor() {
+  constructor(private currentDateService: CurrentDateService) {
     // 
   }
 
   currentDate(): string {
-    return Date();
+    return this.currentDateService.getDate();
   }
 
   updateTime(date: Date) {
