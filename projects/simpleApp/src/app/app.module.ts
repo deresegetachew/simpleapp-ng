@@ -10,11 +10,13 @@ import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductDetailComponent } from './components/product/product-detail.component';
 import { ProductComponent } from './components/product/product.component';
 import { TformsComponent } from './components/tforms/tforms.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoFilterPipePipe } from './pipe/todo-filter-pipe.pipe';
+
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { TodoFilterPipePipe } from './pipe/todo-filter-pipe.pipe';
     HomeComponent,
     NavigationComponent,
     TodoComponent,
-    TodoFilterPipePipe
+    TodoFilterPipePipe,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { TodoFilterPipePipe } from './pipe/todo-filter-pipe.pipe';
       { path: 'product/:id', component: ProductDetailComponent },
       { path: 'product/:category/:id', component: ProductDetailComponent },
       { path: 'forms', component: TformsComponent },
+      { path: 'new-product', component: ProductFormComponent },
       { path: 'http-todo', component: TodoComponent },
       { path: '**', component: NotfoundComponent }
     ])
