@@ -14,6 +14,7 @@ import { ProductDetailComponent } from './components/product/product-detail.comp
 import { ProductComponent } from './components/product/product.component';
 import { TformsComponent } from './components/tforms/tforms.component';
 import { TodoComponent } from './components/todo/todo.component';
+import { TodoFilterPipePipe } from './pipe/todo-filter-pipe.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TodoComponent } from './components/todo/todo.component';
     OrdersComponent,
     HomeComponent,
     NavigationComponent,
-    TodoComponent
+    TodoComponent,
+    TodoFilterPipePipe
   ],
   imports: [
     BrowserModule,
@@ -37,11 +39,14 @@ import { TodoComponent } from './components/todo/todo.component';
       { path: '', component: HomeComponent },
       { path: 'product', component: ProductComponent },
       { path: 'product/:id', component: ProductDetailComponent },
+      { path: 'product/:category/:id', component: ProductDetailComponent },
       { path: 'forms', component: TformsComponent },
+      { path: 'http-todo', component: TodoComponent },
       { path: '**', component: NotfoundComponent }
     ])
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

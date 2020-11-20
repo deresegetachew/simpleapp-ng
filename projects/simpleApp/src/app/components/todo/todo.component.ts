@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/app/interfaces/todo';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -29,35 +30,44 @@ export class TodoComponent implements OnInit {
   filter: string;
   anyRemainingModel: boolean;
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit(): void {
 
     this.anyRemainingModel = true;
     this.filter = 'all';
     this.beforeEditCache = '';
-    this.idForTodo = 4;
+    this.idForTodo = -1;
     this.todoTitle = '';
-    this.todos = [
-      {
-        'id': 1,
-        'title': 'Finish Angular Screencast',
-        'completed': false,
-        'editing': false,
-      },
-      {
-        'id': 2,
-        'title': 'Take over world',
-        'completed': false,
-        'editing': false,
-      },
-      {
-        'id': 3,
-        'title': 'One more thing',
-        'completed': false,
-        'editing': false,
-      },
-    ];
+    this.todos = [];
+    // this.todos = [
+    //   {
+    //     'id': 1,
+    //     'title': 'Finish Angular Screencast',
+    //     'completed': false,
+    //     'editing': false,
+    //   },
+    //   {
+    //     'id': 2,
+    //     'title': 'Take over world',
+    //     'completed': false,
+    //     'editing': false,
+    //   },
+    //   {
+    //     'id': 3,
+    //     'title': 'One more thing',
+    //     'completed': false,
+    //     'editing': false,
+    //   },
+    // ];
+
+    this.todoService.getTodos()
+      .subscribe((response) => {
+        this.todos = response;
+      }, (err) => {
+        alert('An unexpected error occurs');
+      });
+
   }
 
   addTodo(): void {
@@ -65,38 +75,56 @@ export class TodoComponent implements OnInit {
       return;
     }
 
-    this.todos.push({
+    this.todoService.createToDos({
       id: this.idForTodo,
       title: this.todoTitle,
       completed: false,
-      editing: false
+      editing: false,
+    }).subscribe((response) => {
+      console.log(response);
+      this.todos = [].concat({
+        id: this.idForTodo,
+        title: response.title,
+        completed: false,
+        editing: false
+      }).concat(this.todos)
+    }, (err: Response) => {
+      if (err.status === 400) {
+        //this.form.setErrors(error.json());
+      }
+      else
+        alert('An unexpected error occurs');
     })
 
+
+
     this.todoTitle = '';
-    this.idForTodo++;
+    this.idForTodo = this.idForTodo - 1;
   }
 
-  editTodo(todo: Todo): void {
-    this.beforeEditCache = todo.title;
-    todo.editing = true;
+
+  doneToggle(todo: Todo): void {
+    console.log(todo.completed);
+    this.todoService.toggleCompleted(todo.id, todo.completed)
+      .subscribe((response) => {
+        console.log(response);
+      },
+        (err) => {
+          alert('An unexpected error occurs');
+        })
   }
 
-  doneEdit(todo: Todo): void {
-    if (todo.title.trim().length === 0) {
-      todo.title = this.beforeEditCache;
-    }
-
-    this.anyRemainingModel = this.anyRemaining();
-    todo.editing = false;
-  }
-
-  cancelEdit(todo: Todo): void {
-    todo.title = this.beforeEditCache;
-    todo.editing = false;
-  }
 
   deleteTodo(id: number): void {
-    this.todos = this.todos.filter(todo => todo.id !== id);
+    this.todoService.deleteToDo(id).subscribe((response) => {
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    }, (error: Response) => {
+      if (error.status === 404)
+        alert("This item has already benn deleted");
+      else {
+        alert("An unexpected error occuered");
+      }
+    })
   }
 
   remaining(): number {
